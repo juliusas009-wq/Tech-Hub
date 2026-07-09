@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Assistant | Tech Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">🤖 AI Text Assistant</div>
+</header>
+
+<section class="hero">
+    <h1>AI Text Assistant</h1>
+    <p>Rewrite, summarize, and improve your text easily.</p>
+</section>
+
+<div class="ai-container">
+
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+
+    <div class="buttons">
+        <button onclick="rewriteText()">Rewrite</button>
+        <button onclick="summarizeText()">Summarize</button>
+        <button onclick="correctText()">Correct Grammar</button>
+        <button onclick="clearText()">Clear</button>
+    </div>
+
+    <h3>Result:</h3>
+    <div id="result"></div>
+
+</div>
+
+
+<script>
+
+function rewriteText() {
+    let text = document.getElementById("inputText").value;
+
+    document.getElementById("result").innerHTML =
+    "Improved version:<br><br>" +
+    text.split(" ").reverse().join(" ");
+}
+
+
+function summarizeText() {
+    let text = document.getElementById("inputText").value;
+
+    let words = text.split(" ");
+    let summary = words.slice(0, 20).join(" ");
+
+    document.getElementById("result").innerHTML =
+    "Summary:<br><br>" + summary + "...";
+}
+
+
+function correctText() {
+    let text = document.getElementById("inputText").value;
+
+    let corrected = text
+    .replace(/\bi\b/g, "I")
+    .replace(/\s+/g, " ");
+
+    document.getElementById("result").innerHTML =
+    "Corrected Text:<br><br>" + corrected;
+}
+
+
+function clearText() {
+    document.getElementById("inputText").value = "";
+    document.getElementById("result").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>

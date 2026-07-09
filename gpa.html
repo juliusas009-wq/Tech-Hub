@@ -1,73 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPA Calculator</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>GPA Calculator | Student Tech Hub</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="gpa_calculator.html">GPA Calculator</a>
-</nav>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">💻 Student Tech Hub</div>
 
-<h1>GPA Calculator</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="tools.html">Tools</a>
+            <a href="fashion.html">Fashion</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
 
-<p>Enter your grades:</p>
+    <!-- GPA Calculator -->
+    <div class="container">
 
-<input type="number" id="course1" placeholder="Course 1 Grade">
-<br><br>
+        <h1>🎓 GPA Calculator</h1>
+        <p>Enter your marks and credit hours for each course.</p>
 
-<input type="number" id="course2" placeholder="Course 2 Grade">
-<br><br>
+        <table>
+            <tr>
+                <th>Course</th>
+                <th>Mark (%)</th>
+                <th>Credit Hour</th>
+            </tr>
 
-<input type="number" id="course3" placeholder="Course 3 Grade">
-<br><br>
+            <tr>
+                <td>Course 1</td>
+                <td><input type="number" id="mark1" min="0" max="100"></td>
+                <td><input type="number" id="credit1" min="1" value="3"></td>
+            </tr>
 
-<input type="number" id="course4" placeholder="Course 4 Grade">
-<br><br>
+            <tr>
+                <td>Course 2</td>
+                <td><input type="number" id="mark2" min="0" max="100"></td>
+                <td><input type="number" id="credit2" min="1" value="3"></td>
+            </tr>
 
-<input type="number" id="course5" placeholder="Course 5 Grade">
-<br><br>
+            <tr>
+                <td>Course 3</td>
+                <td><input type="number" id="mark3" min="0" max="100"></td>
+                <td><input type="number" id="credit3" min="1" value="3"></td>
+            </tr>
 
-<input type="number" id="course6" placeholder="Course 6 Grade">
-<br><br>    
+            <tr>
+                <td>Course 4</td>
+                <td><input type="number" id="mark4" min="0" max="100"></td>
+                <td><input type="number" id="credit4" min="1" value="3"></td>
+            </tr>
 
-<input type="number" id="course7" placeholder="Course 7 Grade">
-<br><br>
+            <tr>
+                <td>Course 5</td>
+                <td><input type="number" id="mark5" min="0" max="100"></td>
+                <td><input type="number" id="credit5" min="1" value="3"></td>
+            </tr>
 
-<input type="number" id="course8" placeholder="Course 8 Grade">
-<br><br>
+            <tr>
+                <td>Course 6</td>
+                <td><input type="number" id="mark6" min="0" max="100"></td>
+                <td><input type="number" id="credit6" min="1" value="3"></td>
+            </tr>
 
-<button onclick="calculateGPA()">Calculate GPA</button>
+            <tr>
+                <td>Course 7</td>
+                <td><input type="number" id="mark7" min="0" max="100"></td>
+                <td><input type="number" id="credit7" min="1" value="3"></td>
+            </tr>
 
-<h2 id="result"></h2>
+            <tr>
+                <td>Course 8</td>
+                <td><input type="number" id="mark8" min="0" max="100"></td>
+                <td><input type="number" id="credit8" min="1" value="3"></td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <button onclick="calculateGPA()">Calculate GPA</button>
+
+        <h2 id="result"></h2>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Student Tech Hub. All Rights Reserved.</p>
+    </footer>
 
 <script>
-function calculateGPA() {
-    let c1 =
-    Number(document.getElementById("course1").value);
-    let c2 =
-    Number(document.getElementById("course2").value);
-    let c3 =
-    Number(document.getElementById("course3").value);
-    let c4 =
-    Number(document.getElementById("course4").value);
-    let c5 =
-    Number(document.getElementById("course5").value);
-    let c6 =
-    Number(document.getElementById("course6").value);
-    let c7 =
-    Number(document.getElementById("course7").value);
-    let c8 =
-    Number(document.getElementById("course8").value);
 
-    let gpa = (c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8) / 8;
-    document.getElementById("result").innerHTML = "Your GPA is: " + gpa.toFixed(2);
+function getGradePoint(mark){
+
+    if(mark >= 80) return 4.0;
+    if(mark >= 75) return 3.5;
+    if(mark >= 70) return 3.0;
+    if(mark >= 65) return 2.5;
+    if(mark >= 60) return 2.0;
+    if(mark >= 55) return 1.5;
+    if(mark >= 50) return 1.0;
+
+    return 0.0;
+
 }
+
+function calculateGPA(){
+
+    let totalPoints = 0;
+    let totalCredits = 0;
+
+    for(let i = 1; i <= 8; i++){
+
+        let mark = Number(document.getElementById("mark"+i).value);
+        let credit = Number(document.getElementById("credit"+i).value);
+
+        if(mark === "" || mark < 0 || mark > 100){
+
+            alert("Please enter valid marks (0 - 100).");
+            return;
+
+        }
+
+        totalPoints += getGradePoint(mark) * credit;
+        totalCredits += credit;
+
+    }
+
+    let gpa = totalPoints / totalCredits;
+
+    document.getElementById("result").innerHTML =
+    "🎉 Your GPA is: <strong>" + gpa.toFixed(2) + "</strong> / 4.00";
+
+}
+
 </script>
+
 </body>
 </html>
